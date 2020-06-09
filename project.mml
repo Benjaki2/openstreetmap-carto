@@ -22,10 +22,6 @@ _parts:
   # Extents are used for tilemill, and don't actually make it to the generated XML
   extents: &extents
     extent: *world
-    srs-name: "900913"
-    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
-  extents84: &extents84
-    extent: *world
     srs-name: "WGS84"
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   osm2pgsql: &osm2pgsql
@@ -153,14 +149,6 @@ Layer:
         ) AS landcover_line
     properties:
       minzoom: 14
-  - id: icesheet-poly
-    geometry: polygon
-    <<: *extents
-    Datasource:
-      file: data/antarctica-icesheet-polygons-3857/icesheet_polygons.shp
-      type: shape
-    properties:
-      minzoom: 5
   - id: water-lines-casing
     geometry: linestring
     <<: *extents
@@ -249,21 +237,12 @@ Layer:
     properties:
       cache-features: true
       minzoom: 0
-  - id: ocean-lz
-    geometry: polygon
-    class: ocean
-    <<: *extents
-    Datasource:
-      file: data/simplified-water-polygons-split-3857/simplified_water_polygons.shp
-      type: shape
-    properties:
-      maxzoom: 9
   - id: ocean
     geometry: polygon
     class: ocean
     <<: *extents
     Datasource:
-      file: data/water-polygons-split-3857/water_polygons.shp
+      file: data/water-polygons-split-4326/water_polygons.shp
       type: shape
     properties:
       minzoom: 10
@@ -296,14 +275,6 @@ Layer:
         ) AS landcover_area_symbols
     properties:
       cache-features: true
-      minzoom: 5
-  - id: icesheet-outlines
-    geometry: linestring
-    <<: *extents
-    Datasource:
-      file: data/antarctica-icesheet-outlines-3857/icesheet_outlines.shp
-      type: shape
-    properties:
       minzoom: 5
   - id: marinas-area
     geometry: polygon
@@ -1062,7 +1033,7 @@ Layer:
       minzoom: 11
   - id: necountries
     geometry: linestring
-    <<: *extents84
+    <<: *extents
     Datasource:
       file: data/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp
       type: shape
