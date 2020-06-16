@@ -15,15 +15,15 @@ format: png
 interactivity: false
 minzoom: 0
 maxzoom: 22
-srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+srs: "+proj=longlat +datum=WGS84 +no_defs"
 
 # Various parts to be included later on
 _parts:
   # Extents are used for tilemill, and don't actually make it to the generated XML
   extents: &extents
     extent: *world
-    srs-name: "WGS84"
-    srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+    srs-name: "4326"
+    srs: "+proj=longlat +datum=WGS84 +no_defs"
   osm2pgsql: &osm2pgsql
     type: "postgis"
     dbname: "gis"
